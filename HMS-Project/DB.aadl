@@ -1,0 +1,93 @@
+package DB
+public
+	with Base_Types;
+	with SS;
+	with CD;
+	
+	
+	
+	
+	system Database
+	end Database;
+	
+	system implementation Database.with_devices
+		subcomponents
+			this_local : device Local;
+			this_cloud : device Cloud;
+			SC : system SS::Security.impl; -- Security implementation into database
+	end Database.with_devices;
+	
+	
+	
+	
+	--Devices
+	device Local
+		features
+			CDC: requires bus access CD::Bluetooth_Bus.impl;
+	end Local;
+	device implementation Local.impl
+		subcomponents
+		patient_Name : data Base_Types::String;
+		patient_Surname : data Base_Types::String;	
+		patient_History : data Base_Types::String;	
+		patient_Diseases : data Base_Types::String;	
+		patient_Allergies : data Base_Types::String;	
+		patient_Operations : data Base_Types::String;	
+		patient_AcuteDiseases : data Base_Types::String;	
+		patient_Prescription : data Base_Types::String;	
+		pRelavite_Name : data Base_Types::String;
+		pRelavite_Surname : data Base_Types::String;
+		pRelavite_PhoneNumber : data Base_Types::String;
+		pRelavite_Email : data Base_Types::String;
+		pRelavite_Address : data Base_Types::String;
+		pDoctor_Name : data Base_Types::String;
+		pDoctor_Surname : data Base_Types::String;
+		pDoctor_PhoneNumber : data Base_Types::String;
+		pDoctor_Email : data Base_Types::String;
+		pDoctor_HospitalName : data Base_Types::String;
+	end Local.impl;
+	
+	device Cloud
+		
+	end Cloud;
+	device implementation Cloud.impl
+		subcomponents
+		patient_Name : data Base_Types::String;
+		patient_Surname : data Base_Types::String;	
+		patient_History : data Base_Types::String;	
+		patient_Diseases : data Base_Types::String;	
+		patient_Allergies : data Base_Types::String;	
+		patient_Operations : data Base_Types::String;	
+		patient_AcuteDiseases : data Base_Types::String;	
+		patient_Prescription : data Base_Types::String;
+		pRelavite_Name : data Base_Types::String;
+		pRelavite_Surname : data Base_Types::String;
+		pRelavite_PhoneNumber : data Base_Types::String;
+		pRelavite_Email : data Base_Types::String;
+		pRelavite_Address : data Base_Types::String;
+		pDoctor_Name : data Base_Types::String;
+		pDoctor_Surname : data Base_Types::String;
+		pDoctor_PhoneNumber : data Base_Types::String;
+		pDoctor_Email : data Base_Types::String;
+		pDoctor_HospitalName : data Base_Types::String;
+	end Cloud.impl;
+	--Devices
+
+
+
+
+--Buses
+bus DB_Connection
+	end DB_Connection;
+bus implementation DB_Connection.impl
+	end DB_Connection.impl;
+
+
+
+
+
+
+
+
+
+end DB;

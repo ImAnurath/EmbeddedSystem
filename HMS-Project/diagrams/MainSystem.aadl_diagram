@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="f0bfc094-cbd5-468d-96eb-846cee287f4d" manual="true">
+    <element uuid="dd7e2163-65bb-4b45-a4f8-3ff9f557b6f4" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>bp</seg>
+      </bo>
+      <position x="217.33463287353516" y="148.0"/>
+      <size width="62.665367126464844" height="35.0"/>
+    </element>
+    <element uuid="cf0fea21-d872-49dd-8eaf-19ab30f87e09" manual="true">
+      <element uuid="71e842da-1764-4391-9b89-7df93f5a8174" manual="true">
+        <bo>
+          <seg>realization</seg>
+        </bo>
+        <bendpoints>
+          <point x="201.3346405029297" y="165.5"/>
+          <point x="213.33462524414062" y="165.5"/>
+        </bendpoints>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>bp.impl</seg>
+      </bo>
+      <position x="102.35286712646484" y="148.0"/>
+      <size width="94.98176956176758" height="35.0"/>
+    </element>
+    <element uuid="d06181aa-db80-4276-9d41-579e94ba047e" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>bt</seg>
+      </bo>
+      <position x="213.62369537353516" y="38.0"/>
+      <size width="63.11979103088379" height="35.0"/>
+    </element>
+    <element uuid="eb7ecd7d-8b58-4f9f-b208-ee4e4cf45f13" manual="true">
+      <element uuid="426bc07d-e4ce-4f27-a806-8c04d2abaa8b" manual="true">
+        <bo>
+          <seg>realization</seg>
+        </bo>
+        <bendpoints>
+          <point x="197.62368774414062" y="55.5"/>
+          <point x="209.62368774414062" y="55.5"/>
+        </bendpoints>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>bt.impl</seg>
+      </bo>
+      <position x="102.35286712646484" y="38.0"/>
+      <size width="91.27082824707031" height="35.0"/>
+    </element>
+    <element uuid="085f07b3-00ec-4957-af43-7b00e7b7de07" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>cc</seg>
+      </bo>
+      <position x="215.83724212646484" y="93.0"/>
+      <size width="65.3333330154419" height="35.0"/>
+    </element>
+    <element uuid="0b3f0474-bfbb-47b9-b0b5-96f9b4996c4c" manual="true">
+      <element uuid="ce71e01f-b37b-4d4f-910e-c790ffcd9ab9" manual="true">
+        <bo>
+          <seg>realization</seg>
+        </bo>
+        <bendpoints>
+          <point x="199.8372344970703" y="110.5"/>
+          <point x="211.83724975585938" y="110.5"/>
+        </bendpoints>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>cc.impl</seg>
+      </bo>
+      <position x="102.35286712646484" y="93.0"/>
+      <size width="93.48437118530273" height="35.0"/>
+    </element>
+    <element uuid="998612e4-751a-4e60-91b9-1055a4dcebc3" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>ecg</seg>
+      </bo>
+      <position x="224.00130462646484" y="203.0"/>
+      <size width="73.49739456176758" height="35.0"/>
+    </element>
+    <element uuid="0a39a889-2295-4cd1-b001-b2dd7ca746a7" manual="true">
+      <element uuid="9657b8f5-239c-4632-a0fa-c957de3a9240" manual="true">
+        <bo>
+          <seg>realization</seg>
+        </bo>
+        <bendpoints>
+          <point x="208.0012969970703" y="220.5"/>
+          <point x="220.00131225585938" y="220.5"/>
+        </bendpoints>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>ecg.impl</seg>
+      </bo>
+      <position x="102.35286712646484" y="203.0"/>
+      <size width="101.64843368530273" height="35.0"/>
+    </element>
+    <element uuid="c57514cb-19c3-445d-9352-ba7cf8493892" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>HMS</seg>
+      </bo>
+      <position x="289.2096481323242" y="313.0"/>
+      <size width="81.62890434265137" height="35.0"/>
+    </element>
+    <element uuid="95304389-d045-4c10-9822-2453d4e44753" manual="true">
+      <element uuid="1fbafdb1-0154-4e51-acc5-6e427314f448" manual="true">
+        <bo>
+          <seg>realization</seg>
+        </bo>
+        <bendpoints>
+          <point x="273.20965576171875" y="330.5"/>
+          <point x="285.20965576171875" y="330.5"/>
+        </bendpoints>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>HMS.with_devices</seg>
+      </bo>
+      <position x="102.35286712646484" y="313.0"/>
+      <size width="166.85677337646484" height="35.0"/>
+    </element>
+    <element uuid="08c10e01-d4e8-4bff-a9b3-613eafc50057" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>respiration</seg>
+      </bo>
+      <position x="264.7565231323242" y="368.0"/>
+      <size width="114.25259780883789" height="35.0"/>
+    </element>
+    <element uuid="92e2d3c9-d0b3-4b34-b7d6-c4cff932b9a1" manual="true">
+      <element uuid="23c3ad82-ea26-4524-b7dc-94f100620dc1" manual="true">
+        <bo>
+          <seg>realization</seg>
+        </bo>
+        <bendpoints>
+          <point x="248.7565155029297" y="385.5"/>
+          <point x="260.75653076171875" y="385.5"/>
+        </bendpoints>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>respiration.impl</seg>
+      </bo>
+      <position x="102.35286712646484" y="368.0"/>
+      <size width="142.40364837646484" height="35.0"/>
+    </element>
+    <element uuid="d7600689-82eb-4d8d-b2bb-7458a562cce5" manual="true">
+      <bo>
+        <seg>classifier</seg>
+        <seg>Sp02</seg>
+      </bo>
+      <position x="233.64322662353516" y="258.0"/>
+      <size width="83.13932037353516" height="35.0"/>
+    </element>
+    <element uuid="8848d95c-9573-4222-9156-f75b5715fe0e" manual="true">
+      <element uuid="1e7c34cb-0f2d-4af4-adff-a5cec9f7611d" manual="true">
+        <bo>
+          <seg>realization</seg>
+        </bo>
+        <bendpoints>
+          <point x="217.64321899414062" y="275.5"/>
+          <point x="229.64321899414062" y="275.5"/>
+        </bendpoints>
+      </element>
+      <bo>
+        <seg>classifier</seg>
+        <seg>Sp02.impl</seg>
+      </bo>
+      <position x="102.35286712646484" y="258.0"/>
+      <size width="111.29035568237305" height="35.0"/>
+    </element>
+    <bo>
+      <seg>package</seg>
+      <seg>MainSystem</seg>
+    </bo>
+    <position/>
+    <size width="700.0" height="660.0"/>
+  </element>
+  <config type="package" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties/>
+    <context>
+      <seg>package</seg>
+      <seg>MainSystem</seg>
+    </context>
+  </config>
+</diagram:Diagram>

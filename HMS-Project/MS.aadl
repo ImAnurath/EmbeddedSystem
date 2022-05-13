@@ -1,0 +1,264 @@
+package MS
+public
+	
+	with Base_Types;
+	--with CD;
+	
+	
+	processor MS_PROC
+			features
+			PROCA: requires bus access MS_Bus.impl;
+	end MS_PROC;
+	processor implementation MS_PROC.impl
+		
+	end MS_PROC.impl;
+	
+	memory MS_MEM
+		features
+			MEMA: requires bus access MS_Bus.Impl;
+	end MS_MEM;
+	memory implementation MS_MEM.impl
+	end MS_MEM.impl;
+	
+	data status
+	end status;
+	
+	data implementation status.impl
+		
+	end status.impl;
+	
+	--Devices
+    device acc  --accelerometer
+    	features
+    		recv_acc_in: in event data port;
+			recv_acc_out: out event data port;
+			
+			send_acc_in: in event data port;
+			send_acc_out: out event data port;
+			
+			recv_status_in: in event data port;
+			recv_status_out: out event data port;
+			
+			send_status_in: in event data port;
+			send_status_out: out event data port;
+			
+			MSA: requires bus access MS_Bus.impl; 
+			--PATIENT FALLEN OR NOT
+    		
+    		
+	end acc;
+	device implementation acc.impl
+		subcomponents
+		patient_information : data Base_Types::String;
+	end acc.impl;
+	
+	device Sp02 
+		features
+    		recv_heart_beat_in: in event data port;
+    		recv_heart_beat_out: out event data port;
+    		
+    		recv_oxidation_in: in event data port;
+    		recv_oxidation_out: out event data port;
+    		
+    		send_heart_beat_in: in event data port;
+    		send_heart_beat_out: out event data port;
+    		
+    		send_oxidation_in: in event data port;
+    		send_oxidation_out: out event data port;
+    		MSA: requires bus access MS_Bus.impl; 
+    		
+			
+	end Sp02;
+	device implementation Sp02.impl
+		subcomponents
+		heart_beat : data Base_Types::Integer;
+		oxidation: data Base_Types::Integer;
+	end Sp02.impl;
+	
+	device ecg 
+		features
+    		recv_ecg_in: in event data port;
+    		recv_ecg_out: out event data port;
+
+    		send_ecg_in: in event data port;
+    		send_ecg_out: out event data port;
+    		MSA: requires bus access MS_Bus.impl; 
+
+	end ecg;
+	device implementation ecg.impl
+		subcomponents
+		 ecg_d : data Base_Types::Integer;
+	end ecg.impl;
+	
+	device respiration 
+		features
+			recv_breath_rate_in: in event data port;
+    		recv_breath_rate_out: out event data port;
+
+    		send_breath_rate_in: in event data port;
+    		send_breath_rate_out: out event data port;
+    		MSA: requires bus access MS_Bus.impl; 
+    		
+	end respiration;
+	device implementation respiration.impl
+		subcomponents
+		 breath_rate : data Base_Types::Integer;
+	end respiration.impl;
+		
+	device bp --  blood pressure,
+		features
+
+    		recv_tension_in: in event data port;
+    		recv_tension_out: out event data port;
+
+    		send_tension_in: in event data port;
+    		send_tension_out: out event data port;
+    		MSA: requires bus access MS_Bus.impl; 
+    		
+	end bp;
+	device implementation bp.impl
+		subcomponents
+		 tension : data Base_Types::Integer;
+	end bp.impl;
+	
+	device bt -- body temperature
+		features
+
+			recv_temperature_in: in event data port;
+    		recv_temperature_out: out event data port;
+
+    		send_temperature_in: in event data port;
+    		send_temperature_out: out event data port;
+    		MSA: requires bus access MS_Bus.impl; 
+			
+	end bt;
+	device implementation bt.impl
+		subcomponents
+		 body_temperature : data Base_Types::Integer;
+	end bt.impl;
+	--Devices
+	
+	--Buses
+	bus MS_Bus
+	end MS_Bus;
+	bus implementation MS_Bus.impl
+	end MS_Bus.impl;
+	
+	bus acc_bus
+	end acc_bus;
+	bus implementation acc_bus.impl
+	end acc_bus.impl;
+	
+	bus Sp02_bus
+	end Sp02_bus;
+	bus implementation Sp02_bus.impl
+	end Sp02_bus.impl;
+	
+	bus ecg_bus
+	end ecg_bus;
+	bus implementation ecg_bus.impl
+	end ecg_bus.impl;
+	
+	bus resp_bus
+	end resp_bus;
+	bus implementation resp_bus.impl
+	end resp_bus.impl;
+	
+	bus bp_bus
+	end bp_bus;
+	bus implementation bp_bus.impl
+	end bp_bus.impl;
+	
+	bus bt_bus
+	end bt_bus;
+	bus implementation bt_bus.impl
+	end bt_bus.impl;
+	--Buses
+	
+	
+	
+	
+	
+	system HMS
+		features
+			acc_recv: in event data port;  -- ACC
+			acc_send: out event data port;
+			
+			heartbeat_recv: in event data port;	-- SP02
+			oxidation_recv: in event data port;	-- SP02
+			heartbeat_send: out event data port;	-- SP02
+			oxidation_send: out event data port;
+			
+			
+			ecg_recv: in event data port;
+			ecg_send: out event data port;
+			
+			resp_recv: in event data port;
+			resp_send: out event data port;
+			
+			bp_recv: in event data port;
+			bp_send: out event data port;
+			
+			bt_recv: in event data port;
+			bt_send: out event data port;
+			--NEED BUSES
+			
+	end HMS;
+	
+	system implementation HMS.impl
+		subcomponents
+			ACC_HW  : device acc.impl;
+			SP02_HW : device Sp02.impl;
+			ECG_HW  : device ecg.impl;
+			RESP_HW : device respiration.impl;
+			BP_HW   : device bp.impl;
+			BT_HW   : device bt.impl;
+			PROC_HW : processor MS_PROC.impl;
+			MEM_HW  : memory MS_MEM.impl;
+			BUS_HW  : bus MS_Bus.impl;
+			--PROC_SW  NEED TO MAKE A SOFTWARE FOR THIS
+		connections--Device access to system
+			bac1: bus access ACC_HW.MSA <-> BUS_HW;
+			bac2: bus access SP02_HW.MSA <-> BUS_HW;
+			bac3: bus access ECG_HW.MSA <-> BUS_HW;
+			bac4: bus access RESP_HW.MSA <-> BUS_HW;
+			bac5: bus access BP_HW.MSA <-> BUS_HW;
+			bac6: bus access BT_HW.MSA <-> BUS_HW;
+			
+			--Inner communication
+			c01: port acc_recv -> ACC_HW.recv_acc_in;
+		
+			c02: port heartbeat_recv -> SP02_HW.recv_heart_beat_in;
+			c03: port oxidation_recv -> SP02_HW.recv_oxidation_in;
+			
+			c04: port ecg_recv -> ECG_HW.recv_ecg_in;
+			
+			c05: port resp_recv-> RESP_HW.recv_breath_rate_in;
+			
+			c06: port bp_recv ->  BP_HW.recv_tension_in;
+			
+			c07: port bt_recv ->  BT_HW.recv_temperature_in;
+			
+			
+			
+    		
+			
+			
+			
+			
+	end HMS.impl;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+end MS;

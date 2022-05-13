@@ -1,0 +1,194 @@
+package SWS
+
+
+public
+	with Base_Types;
+	with Data_Model;
+	--with MS;
+	--ALL DEVICE DRIVERS AS THREADS THAT RECIEVE DATA IN AND BASICLY WORKS ON THEM
+--	ACC_HW  : device acc.impl;
+--			SP02_HW : device Sp02.impl;
+--			ECG_HW  : device ecg.impl;
+--			RESP_HW : device respiration.impl;
+--			BP_HW   : device bp.impl;
+--			BT_HW   : device bt.impl;
+
+-- DATA
+data hearbeat
+end hearbeat;
+
+data oxidation
+
+end oxidation;
+
+data breathrate
+	
+end breathrate;
+
+data ecg
+	properties
+			Data_Model::Data_Representation => Array;
+			Data_Model::Base_Type => (classifier (Base_Types::Integer));
+			Data_Model::Dimension => (3);
+end ecg;
+	
+data tension
+	
+end tension;
+
+data bodytemp
+	
+end bodytemp;
+
+data acceleration
+	
+end acceleration;
+
+data patientState
+	
+end patientState;
+
+data implementation patientState.impl
+	subcomponents
+	acc: data acceleration;
+end patientState.impl;
+-- DATA
+
+
+--THREADS
+thread SP02_Driver
+	 features
+	 hb_recv: in event data port Base_Types::Integer;
+	 ox_recv: in event data port Base_Types::Integer;
+	 
+	 hb_send: out event data port Base_Types::Integer;
+	 ox_send: out event data port Base_Types::Integer;
+	 
+end SP02_Driver;
+
+thread ECG_Driver
+	features
+		-- VL VR VF
+		--resting active resting-on foot
+	 ecg_VL_recv: in event data port ecg;
+	 ecg_VL_send: out event data port ecg;
+	 
+	 ecg_VR_recv: in event data port ecg;
+	 ecg_VR_send: out event data port ecg;
+	 
+	 ecg_VF_recv: in event data port ecg;
+	 ecg_VF_send: out event data port ecg;
+	 
+end ECG_Driver;
+
+thread RES_Driver
+	features
+	 br_recv: in event data port Base_Types::Integer;
+	 br_send: out event data port Base_Types::Integer;
+end RES_Driver;
+
+thread BP_Driver
+	features
+	 ten_recv: in event data port Base_Types::Integer;  
+	 ten_send: out event data port Base_Types::Integer; 
+end BP_Driver;
+
+thread BT_Driver
+	features
+		bt_recv: in event data port Base_Types::Integer;
+		bt_send: out event data port Base_Types::Integer;
+end BT_Driver;
+
+thread ACC_Driver
+	features
+	 st_recv: in event data port Base_Types::String;
+	 st_send: out event data port Base_Types::String;
+	 
+end ACC_Driver;
+
+thread implementation ACC_Driver.impl
+	
+end ACC_Driver.impl;
+--THREADS
+
+
+process SW
+
+	features
+		hb_recv0: in event data port Base_Types::Integer;
+		ox_recv0: in event data port Base_Types::Integer;
+		br_recv0: in event data port Base_Types::Integer;
+		ten_recv0: in event data port Base_Types::Integer;
+		bt_recv0: in event data port Base_Types::Integer;
+		st_recv0: in event data port Base_Types::String;
+		ecg_VL_recv0: in event data port ecg;
+		ecg_VR_recv0: in event data port ecg;
+		ecg_VF_recv0: in event data port ecg;
+		
+		
+		hb_send0: out event data port Base_Types::Integer;
+		ox_send0: out event data port Base_Types::Integer;
+		br_send0: out event data port Base_Types::Integer;
+		ten_send0: out event data port Base_Types::Integer;
+		bt_send0: out event data port Base_Types::Integer;
+		st_send0: out event data port Base_Types::String;
+		ecg_VL_send0: out event data port ecg;
+		ecg_VR_send0: out event data port ecg;
+		ecg_VF_send0: out event data port ecg;
+	end SW;
+
+	process implementation SW.Impl
+		subcomponents
+			SP0: thread SP02_Driver;
+			ECG: thread ECG_Driver; 
+			RES: thread RES_Driver;
+			BP: thread BP_Driver;
+			BT: thread BT_Driver; 
+			ACC: thread ACC_Driver.impl; 
+		connections
+		c1: port hb_recv0 -> SP0.hb_recv;
+		c2: port SP0.hb_send -> hb_send0;
+		c3: port ox_recv0 -> SP0.ox_recv;
+		c4: port SP0.ox_send -> ox_send0;
+		c5: port br_recv0 -> RES.br_recv;
+		c6: port RES.br_send -> br_send0;
+		c7: port ten_recv0 -> BP.ten_recv;
+		c8: port BP.ten_send -> ten_send0;
+		c9: port bt_recv0 -> BT.bt_recv;
+		c10: port BT.bt_send -> bt_send0;
+		c11: port st_recv0 -> ACC.st_recv;
+		c12: port ACC.st_send -> st_send0;
+		c13: port ecg_VL_recv0 -> ECG.ecg_VL_recv;
+		c14: port ecg_VR_recv0 -> ECG.ecg_VR_recv;
+		c15: port ecg_VF_recv0 -> ECG.ecg_VF_recv;
+		c16: port ECG.ecg_VL_send -> ecg_VL_send0;
+		c17: port ECG.ecg_VR_send -> ecg_VR_send0;
+		c18: port ECG.ecg_VF_send -> ecg_VF_send0;
+	end SW.Impl;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+system SWS
+	end SWS;
+
+	system implementation SWS.impl
+	--	subcomponents
+		--	SW: process SW::SW.Impl;
+	end SWS.impl;
+
+end SWS;

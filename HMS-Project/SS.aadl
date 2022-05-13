@@ -1,0 +1,79 @@
+package SS
+public
+	with Base_Types;
+	
+	system Security
+		
+	end Security;
+	
+	system implementation Security.impl
+		subcomponents
+			SSSI: process SSS;
+		
+	end Security.impl;
+	
+	--Bus
+	bus Security_Access
+	end Security_Access;
+	bus implementation Security_Access.impl
+		
+	end Security_Access.impl;
+	--Bus
+	
+	
+	-- Data
+	data User
+	end User;
+	data implementation User.impl
+		subcomponents
+			character: data Base_Types::String;
+			number: data Base_Types::Integer;
+	end User.impl;
+
+	data Password
+	end Password;
+	data implementation Password.impl
+		subcomponents
+			character: data Base_Types::String;
+			number: data Base_Types::Integer;
+	end Password.impl;
+	-- Data
+	
+	
+	
+	
+	--Thread	
+	thread Authentication  --checks if ID is unique and assigns the password to that ID
+		features
+		ID: in data port User;
+		PW: in data port Password;
+	end Authentication;
+	thread implementation Authentication.impl
+		
+	end Authentication.impl;
+	
+	thread Authorization
+		
+	end Authorization;
+	thread implementation Authorization.impl
+		
+	end Authorization.impl;
+	--Thread
+	
+	
+	
+	
+	
+	-- Process gotta implement all threads into it
+	process SSS
+		
+	end SSS;
+	
+	process implementation SSS.impl
+		subcomponents
+			atc : thread Authentication.impl;
+			atz : thread Authorization.impl;
+	end SSS.impl;
+	
+	
+end SS;

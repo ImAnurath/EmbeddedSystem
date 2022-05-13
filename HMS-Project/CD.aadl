@@ -1,0 +1,103 @@
+package CD
+public
+	-- with MS;
+	
+	processor CD_proc
+	end CD_proc;
+	processor implementation CD_proc.impl
+			
+	end CD_proc.impl;
+	
+	-- Devices
+	device Bluetooth  
+		features
+			CDA_B: requires bus access CD_Bus.impl;
+			BBA : requires bus access Bluetooth_Bus.impl;
+			CD_heartBeat_IN: in event data port;
+			CD_oxidation_IN: in event data port;
+			CD_ecg_IN: in event data port;
+			CD_breathRate_IN: in event data port;
+			CD_tension_IN: in event data port;
+			CD_bodyTemperature_IN: in event data port;
+			
+			CD_heartBeat_OUT: out event data port;
+			CD_oxidation_OUT: out event data port;
+			CD_ecg_OUT: out event data port;
+			CD_breathRate_OUT: out event data port;
+			CD_tension_OUT: out event data port;
+			CD_bodyTemperature_OUT: out event data port;
+			
+			
+	end Bluetooth;
+	device Storage  
+		features
+			CDA_S: requires bus access CD_Bus.impl;
+			Store_heartBeat: in event data port;
+			Store_oxidation: in event data port;
+			Store_ecg: in event data port;
+			Store_breathRate: in event data port;
+			Store_tension: in event data port;
+			Store_bodyTemperature: in event data port;
+	end Storage;
+	-- Devices
+	
+	
+	
+	
+	--Buses
+	bus CD_Bus
+
+	end CD_Bus;
+	bus implementation CD_Bus.impl
+
+		
+	end CD_Bus.impl;	
+	
+	bus Bluetooth_Bus
+		
+	end Bluetooth_Bus;
+	bus implementation Bluetooth_Bus.impl
+		
+	end Bluetooth_Bus.impl;
+	
+	bus Store_Bus
+
+	end Store_Bus;
+	bus implementation Store_Bus.impl
+
+		
+	end Store_Bus.impl;
+	--Buses
+	
+	
+	
+		
+	device implementation Bluetooth.impl	
+	end Bluetooth.impl;	
+	device implementation Storage.impl
+		
+	end Storage.impl;
+
+
+
+
+	System ComputingDevice
+	   --compute data and upload to cloud SOMEHOW?
+	end ComputingDevice;
+	
+	system implementation ComputingDevice.impl --Connected to main system and uses its devices
+		subcomponents
+			Bluetooth_HW : device Bluetooth.impl;  --MS device connections
+			Store_HW : device Storage.impl;
+			Bus_HW : bus CD_Bus.impl;
+			--MS_HW : system MS::HMS.impl;  since ms has the implementation its not allowing me to
+			-- Needs to get all the collected data WITH bluetooth from the MS
+			connections 
+				bac1: bus access Bluetooth_HW.CDA_B <-> Bus_HW; --granting access?
+				bac2: bus access Store_HW.CDA_S <-> Bus_HW;
+				
+				
+			
+	end ComputingDevice.impl;
+	
+end CD;
